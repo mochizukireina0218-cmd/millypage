@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HELLO! My Name is Milly!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #FDFAF6;
+      --rose: #D4856A;
+      --rose-light: #F2C4AD;
+      --rose-dark: #A85840;
+      --sage: #A8B5A2;
+      --text: #3A3228;
+      --text-light: #7A6E68;
+      --white: #FFFFFF;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      filter: grayscale(100%) brightness(0.72);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(58, 50, 40, 0.15) 0%,
+        rgba(58, 50, 40, 0.05) 40%,
+        rgba(58, 50, 40, 0.55) 100%
+      );
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 80px;
+      text-align: center;
+    }
+
+    .hero__sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--rose-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 8vw, 6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      color: var(--rose-light);
+    }
+
+    .hero__scroll {
+      margin-top: 32px;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.1s forwards;
+    }
+
+    .hero__scroll span {
+      display: block;
+      width: 1px;
+      height: 50px;
+      background: var(--white);
+      margin: 0 auto;
+      animation: scrollLine 1.8s ease infinite;
+    }
+
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION COMMONS ───────────────────── */
+    section {
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+      color: var(--rose);
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 60px;
+    }
+
+    /* ─── PROFILE ───────────────────────────── */
+    .profile {
+      background-color: var(--white);
+    }
+
+    .profile__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+      max-width: 860px;
+      margin: 0 auto;
+      border: 2px solid var(--rose-light);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .profile__item {
+      padding: 36px 28px;
+      text-align: center;
+      background: var(--white);
+      transition: background 0.3s;
+    }
+
+    .profile__item:not(:last-child) {
+      border-right: 2px solid var(--rose-light);
+    }
+
+    .profile__item:hover {
+      background: var(--cream);
+    }
+
+    .profile__icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: var(--rose);
+    }
+
+    .trait__icon i,
+    .profile__icon i {
+      display: inline-block;
+    }
+
+    .profile__key {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--rose);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .profile__value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ─── ABOUT ─────────────────────────────── */
+    .about {
+      background-color: var(--cream);
+    }
+
+    .about__inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .about__traits {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .trait {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 28px 32px;
+      background: var(--white);
+      border-radius: 16px;
+      border-left: 4px solid var(--rose);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .trait:hover {
+      transform: translateX(6px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    }
+
+    .trait__icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 4px;
+      color: var(--rose);
+    }
+
+    .trait__body {}
+
+    .trait__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .trait__desc {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: var(--text-light);
+    }
+
+    /* ─── GALLERY ───────────────────────────── */
+    .gallery {
+      background-color: var(--white);
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .gallery__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gallery__card--video {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery__card--video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery__card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .gallery__card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery__card:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 24px 24px;
+      background: linear-gradient(to top, rgba(58,50,40,0.75) 0%, transparent 100%);
+      color: var(--white);
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transform: translateY(4px);
+      transition: transform 0.3s;
+    }
+
+    .gallery__card:hover .gallery__caption {
+      transform: translateY(0);
+    }
+
+    /* ─── FOOTER ────────────────────────────── */
+    footer {
+      background-color: var(--text);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--rose-light);
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ──────────────────────────────── -->
+  <section class="hero">
+    <img class="hero__img" src="images/hero.jpg" alt="Milly" />
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__sub">West Highland White Terrier</p>
+      <h1 class="hero__title">HELLO!<br><em>My Name is Milly!</em></h1>
+      <div class="hero__scroll"><span></span></div>
+    </div>
+  </section>
+
+  <!-- ── PROFILE ───────────────────────────── -->
+  <section class="profile">
+    <p class="section-label reveal">Profile</p>
+    <h2 class="section-title reveal">みりぃのきほん</h2>
+    <div class="profile__grid">
+      <div class="profile__item reveal reveal-delay-1">
+        <div class="profile__icon"><i class="fa-solid fa-cake-candles"></i></div>
+        <p class="profile__key">Birthday</p>
+        <p class="profile__value">2023年6月12日</p>
+      </div>
+      <div class="profile__item reveal reveal-delay-2">
+        <div class="profile__icon"><i class="fa-solid fa-paw"></i></div>
+        <p class="profile__key">Breed</p>
+        <p class="profile__value">ウエスト・ハイランド・ホワイト・テリア</p>
+      </div>
+      <div class="profile__item reveal reveal-delay-3">
+        <div class="profile__icon"><i class="fa-solid fa-ribbon"></i></div>
+        <p class="profile__key">Gender</p>
+        <p class="profile__value">女の子</p>
+      </div>
+      <div class="profile__item reveal reveal-delay-4">
+        <div class="profile__icon"><i class="fa-solid fa-weight-scale"></i></div>
+        <p class="profile__key">Weight</p>
+        <p class="profile__value">10 kg</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ─────────────────────────────── -->
+  <section class="about">
+    <p class="section-label reveal">About Milly</p>
+    <h2 class="section-title reveal">みりぃってこんな子</h2>
+    <div class="about__inner">
+      <div class="about__traits">
+        <div class="trait reveal">
+          <div class="trait__icon"><i class="fa-solid fa-heart"></i></div>
+          <div class="trait__body">
+            <p class="trait__title">甘えん坊</p>
+            <p class="trait__desc">いつでもそばにいたい、大の甘えん坊。膝の上が大好きで、ちょっとでも離れると追いかけてくる。</p>
+          </div>
+        </div>
+        <div class="trait reveal reveal-delay-1">
+          <div class="trait__icon"><i class="fa-solid fa-person-walking"></i></div>
+          <div class="trait__body">
+            <p class="trait__title">お散歩大好き</p>
+            <p class="trait__desc">外に出ると目をキラキラさせて全力でリードを引っ張る。風のにおいをくんくん嗅ぐのが何より好き。</p>
+          </div>
+        </div>
+        <div class="trait reveal reveal-delay-2">
+          <div class="trait__icon"><i class="fa-solid fa-moon"></i></div>
+          <div class="trait__body">
+            <p class="trait__title">マイペース & ひとりモード</p>
+            <p class="trait__desc">ふいにひとりになりたいもーどが発動。そっとしておいてあげるのが正解。</p>
+          </div>
+        </div>
+        <div class="trait reveal reveal-delay-3">
+          <div class="trait__icon"><i class="fa-solid fa-bone"></i></div>
+          <div class="trait__body">
+            <p class="trait__title">食いしん坊！</p>
+            <p class="trait__desc">とにかく食べることが大好き。キッチンに立つとすぐ飛んでくる、筋金入りの食いしん坊。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY ────────────────────────────── -->
+  <section class="gallery">
+    <p class="section-label reveal">Gallery</p>
+    <h2 class="section-title reveal">みりぃのフォトギャラリー</h2>
+    <div class="gallery__grid">
+      <div class="gallery__card reveal reveal-delay-1">
+        <img src="images/food.jpg" alt="ごはんがだいすき！" />
+        <div class="gallery__caption">ごはんがだいすき！</div>
+      </div>
+      <div class="gallery__card reveal reveal-delay-2">
+        <img src="images/beach.jpg" alt="海ではしゃぐのが大好き" />
+        <div class="gallery__caption">海ではしゃぐのが大好き</div>
+      </div>
+      <div class="gallery__card reveal reveal-delay-3">
+        <img src="images/arms.jpg" alt="腕の中が落ち着く" />
+        <div class="gallery__caption">腕の中が落ち着く</div>
+      </div>
+      <div class="gallery__card reveal reveal-delay-4">
+        <img src="images/sleep.jpg" alt="眠るときはのんびり" />
+        <div class="gallery__caption">眠るときはのんびり</div>
+      </div>
+      <div class="gallery__card gallery__card--video reveal">
+        <video src="images/milly.mov" autoplay muted loop playsinline></video>
+        <div class="gallery__caption">いちごをあげるの忘れて空っぽになったお皿をみて怒ってる子</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────── -->
+  <footer>
+    <strong>Milly's Page</strong>
+    &copy; 2024 Milly the Westie
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
